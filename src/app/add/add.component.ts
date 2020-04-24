@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { DataService } from '../data.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
+import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
+import { JobPost } from '../job-post';
 
 @Component({
   selector: 'app-add',
@@ -19,7 +21,6 @@ export class AddComponent implements OnInit {
   @ViewChild('editor') editor: JsonEditorComponent;
 
   showData;
-
   options = new JsonEditorOptions();
   data: any = {
     "metadata": {
@@ -38,12 +39,17 @@ export class AddComponent implements OnInit {
     "mediatype": "V",
     "generatortype": "squeezenet"
   };
+  form: FormGroup;
+  // postData = [];
 
   constructor(private dataService: DataService, public dialogRef: MatDialogRef<AddComponent>,
-    @Inject(MAT_DIALOG_DATA) public postData: object) {
+    private fb: FormBuilder) {
     this.options.language = 'en';
     this.options.mode = 'code';this.options.modes = ['code', 'text', 'tree', 'view'];
     this.options.statusBar = false;
+    this.form = this.fb.group({
+      postData: [this.data]
+    });
   }
 
   showJson(d) {
@@ -53,9 +59,8 @@ export class AddComponent implements OnInit {
   changeLog(event = null) {
     this.showData = this.editor.get();
   }
-
-  submit(postData: object) {
-    console.log(postData);
+  addEntry() {
+    let postData = this.form.value.postData;
     this.dataService.sendPostRequest('/', postData).pipe(takeUntil(this.destroy$)).subscribe((res: HttpResponse<any>) => {
       this.onNoClick();
       console.log(res);

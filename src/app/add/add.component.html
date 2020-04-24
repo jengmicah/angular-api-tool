@@ -4,18 +4,19 @@
 
 <h1 align="center">Add an Entry</h1>
 
-<form>
+<form [formGroup]="form" (submit)="addEntry()" align="center">
   <json-editor
     #editor
     [options]="options"
     [data]="data"
     (change)="changeLog($event)"
+    formControlName="postData"
   ></json-editor>
   <button
     class="button green add-item"
     color="green"
-    (click)="submit(data)"
     style="margin-top: 10px;"
+    type="submit"
   >
     Submit
   </button>
