@@ -1,0 +1,51 @@
+<header class="app-page-header">
+  <section>
+    <h2>Query Metadata</h2>
+    <h4>Explore Vulcan metadata output.</h4>
+  </section>
+  <button class="button add-item green" color="green" (click)="addPopup()">+ Add Entry</button>
+</header>
+<main class="app-page-content">
+    
+  <section class="query-params-form">
+    <h5>Query Params:</h5>
+    <form>
+      <div class="form-row row">
+        <label>Search</label>
+        <input type="text" placeholder="Enter text..." value />
+      </div>
+      <button type="submit" class="button">Submit</button>
+    </form>
+  </section>
+
+  <div class="cards-wrapper">
+    <mat-spinner *ngIf="jobs.length === 0"></mat-spinner>
+    <mat-card *ngFor="let job of jobs">
+      <mat-card-content>
+        <video width="100%">
+          <source src="{{ job.jobdetails.signedUrls }}" type="video/mp4" />
+          <source src="{{ job.jobdetails.signedUrls }}" type="video/ogg" />
+          Your browser does not support the video tag.
+        </video>
+      </mat-card-content>
+      <mat-card-content>
+        <div class="card-row text">
+          <label>Name: </label><span>{{ job.generatortype }}</span>
+        </div>
+        <div class="card-row text">
+          <label>Ingested Date: </label
+          ><span>{{ job.ingested_date_time.split("T")[0] }}</span>
+        </div>
+        <div class="card-row text">
+          <label>Ingested Time: </label
+          ><span>{{ job.ingested_date_time.split("T")[1] }}</span>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button (click)="videoPopup(job.jobdetails.jobID)">
+                View
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</main>

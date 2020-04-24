@@ -1,0 +1,15 @@
+<button class="close" mat-button (click)="onNoClick()">
+  <fa-icon [icon]="faTimes"></fa-icon>
+</button>
+
+<div mat-dialog-title><strong>Model Name:</strong> {{ data.jobdetails.model_name }}</div>
+<div mat-dialog-title><strong>Generator Type:</strong> {{ data.generatortype }}</div>
+<div mat-dialog-title><strong>JobID:</strong> {{ data.jobdetails.jobID }}</div>
+
+<div mat-dialog-content>
+  <video width="100%" controls>
+    <source src="{{ data.jobdetails.signedUrls }}" type="video/mp4" />
+    <source src="{{ data.jobdetails.signedUrls }}" type="video/ogg" />
+    Your browser does not support the video tag.
+  </video>
+</div>

@@ -1,0 +1,12 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #drawer mode="side" opened role="navigation">
+    <h1 class="app-name">Vulcan</h1>
+    <mat-nav-list>
+      <a disableRipple mat-list-item routerLink="/first" routerLinkActive="active">Query Metadata</a>
+      <a disableRipple mat-list-item routerLink="/second" routerLinkActive="active">Coming Soon...</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
