@@ -27,7 +27,6 @@ export class AddComponent implements OnInit {
       "output": {
         "squeezenet:4dcf107": {
           "0": "{\"boxes\": [[[0, 0.36453497409820557, 0.4723466634750366, 0.42795300483703613]], [[0.1828286200761795, 0.3654136657714844, 0.47036081552505493, 0.4266101121902466]]], \"scores\": [[0.34061044454574585], [0.31779828667640686]], \"classes\": [[0], [0]], \"num_detections\": [1, 1]}",
-          "120": "{\"boxes\": [[[0.18763114511966705, 0.3640512228012085, 0.4683447480201721, 0.417728066444397]], [[0.1894780844449997, 0.36342841386795044, 0.4693613648414612, 0.4182714819908142]]], \"scores\": [[0.3048851191997528], [0.30213308334350586]], \"classes\": [[0], [0]], \"num_detections\": [1, 1]}"
       }
     },
     "model_name": "squeezeNet_deeperDSSD_face_TFv1.8_296x296_01162019",
@@ -36,8 +35,7 @@ export class AddComponent implements OnInit {
     ],
     "jobID": "4326d79"
     },
-    "mediatype": "V",
-    "generatortype": "squeezenet"
+    "mediatype": "V"
   };
   form: FormGroup;
   // postData = [];

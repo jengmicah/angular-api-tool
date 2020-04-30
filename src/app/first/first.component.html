@@ -35,8 +35,8 @@
         </video>
       </mat-card-content>
       <mat-card-content>
-        <div class="card-row text" *ngIf="job.generatortype">
-          <label>Name: </label><span>{{ job.generatortype }}</span>
+        <div class="card-row text" >
+          <label>Modules: </label><span>{{ job.jobdetails.module_names.join(', ') }}</span><br>
         </div>
         <div class="card-row text" *ngIf="job.ingested_date_time">
           <label>Ingested Date: </label><span>{{ job.ingested_date_time.split("T")[0] }}</span>
@@ -45,7 +45,7 @@
           <label>Ingested Time: </label><span>{{ job.ingested_date_time.split("T")[1] }}</span>
         </div>
         <div class="card-row text" *ngIf="job.frequency">
-          <label>Class Frequency: </label><span>{{ job.frequency }}</span>
+          <label>Frequency: </label><span>{{ job.frequency }}</span>
         </div>
       </mat-card-content>
       <mat-card-actions>
