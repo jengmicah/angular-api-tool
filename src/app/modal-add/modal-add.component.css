@@ -10,6 +10,3 @@ textarea.jsoneditor-text {
 .ace_editor.ace-jsoneditor {
   min-height: 350px;
 }
-::ng-deep .mat-dialog-container {
-  padding: 24px !important;
-}
