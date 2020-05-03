@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService } from '../data.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -6,15 +6,9 @@ import { HttpResponse } from '@angular/common/http';
 import { JobAll } from '../job-all';
 import { JobSingle } from '../job-single';
 import { MatDialog } from '@angular/material/dialog';
-import { VideoComponent } from '../video/video.component';
-import { AddComponent } from '../add/add.component';
-import {
-  FormBuilder,
-  FormGroup,
-  FormArray,
-  FormControl,
-  ValidatorFn,
-} from '@angular/forms';
+import { ModalVideoComponent } from '../modal-video/modal-video.component';
+import { ModalAddComponent } from '../modal-add/modal-add.component';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-first',
@@ -41,35 +35,40 @@ export class FirstComponent implements OnInit, OnDestroy {
     });
   }
 
-  /* HTTP Client Requests using DataService */
+  /**
+   * HTTP Client Requests
+   */
+  /* Send GET request for all jobs using DataService */
   getAll() {
     this.dataService
       .sendGetRequest('/')
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: HttpResponse<any>) => {
         this.jobs = res.body.response;
-        // console.log(this.jobs);
       });
   }
+  /* Send GET request for a single job (by jobID) using DataService */
   getSingle(jobid: string) {
     this.dataService
       .sendGetRequest('/' + jobid)
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: HttpResponse<any>) => {
         this.singleJob = res.body.response;
-        // console.log(this.singleJob);
       });
   }
+  /* Send GET request jobs with query parameter using DataService */
   getFiltered(queryParam: string) {
     this.dataService
       .sendGetRequest('?' + this.selectedParam + '=' + queryParam)
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: HttpResponse<any>) => {
         this.jobs = res.body.response;
-        // console.log(this.jobs);
       });
   }
 
+  /**
+   * Popup Handlers
+   */
   /* Instantiate Video Component in popup */
   videoPopup(jobid: string) {
     this.dataService
@@ -77,27 +76,18 @@ export class FirstComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: HttpResponse<any>) => {
         this.singleJob = res.body.response[0];
-        // console.log(this.singleJob);
-        const dialogRef = this.dialog.open(VideoComponent, {
+        const dialogRef = this.dialog.open(ModalVideoComponent, {
           width: '100%',
           height: '100%',
           data: this.singleJob,
-          // data: {
-          //   generatortype: this.singleJob.generatortype,
-          //   metadata: this.singleJob.metadata,
-          //   jobdetails: this.singleJob.jobdetails,
-          // },
-          disableClose: true,
+          // disableClose: true,
         });
-
-        dialogRef.afterClosed().subscribe((result) => {
-          // console.log('The dialog was closed');
-        });
+        dialogRef.afterClosed().subscribe((result) => { });
       });
   }
   /* Instantiate Add Component in popup */
   addPopup() {
-    const dialogRef = this.dialog.open(AddComponent, {
+    const dialogRef = this.dialog.open(ModalAddComponent, {
       width: '90%',
       height: '90%',
       data: {},
@@ -105,10 +95,13 @@ export class FirstComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      // console.log('The dialog was closed');
       this.getAll();
     });
   }
+
+  /**
+   * Form (Query Param) Handler
+   */
   /* Handle Query Parameter Requests */
   queryParamSubmit() {
     if (this.form.value.queryParam !== '') {
@@ -117,10 +110,14 @@ export class FirstComponent implements OnInit, OnDestroy {
       this.getAll();
     }
   }
-  // Event handler for the select element's change event
+  /* Event handler for the select element's change event */
   selectChangeHandler(event: any) {
     this.selectedParam = event.target.value;
   }
+
+  /**
+   * Angular Init and Destroy Functions
+   */
   ngOnInit() {
     this.getAll();
   }

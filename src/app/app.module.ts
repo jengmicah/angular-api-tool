@@ -4,12 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NavigationComponent } from './navigation/navigation.component';
 import { FirstComponent } from './first/first.component';
 import { SecondComponent } from './second/second.component';
-import { VideoComponent } from './video/video.component';
+import { ModalVideoComponent } from './modal-video/modal-video.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -24,7 +24,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AddComponent } from './add/add.component';
+import { ModalAddComponent } from './modal-add/modal-add.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
@@ -38,15 +38,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     NavigationComponent,
     FirstComponent,
     SecondComponent,
-    VideoComponent,
-    AddComponent
+    ModalVideoComponent,
+    ModalAddComponent
   ],
   imports: [
     FontAwesomeModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule,
+    NoopAnimationsModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
