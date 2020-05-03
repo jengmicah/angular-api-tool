@@ -8,69 +8,92 @@ import { JobSingle } from '../job-single';
 import { MatDialog } from '@angular/material/dialog';
 import { VideoComponent } from '../video/video.component';
 import { AddComponent } from '../add/add.component';
-import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormArray,
+  FormControl,
+  ValidatorFn,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-first',
   templateUrl: './first.component.html',
-  styleUrls: ['./first.component.css']
+  styleUrls: ['./first.component.css'],
 })
 export class FirstComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
-  
+
   jobs: JobAll[] = [];
   singleJob: JobSingle;
   form: FormGroup;
-  classnum = [];
+  queryParam: string[] = [];
+  selectedParam: string = 'classnum';
 
-  constructor(private dataService: DataService, public dialog: MatDialog, private fb: FormBuilder) {
+  constructor(
+    private dataService: DataService,
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {
     this.form = this.fb.group({
-      classnum: ['']
+      queryParam: [''],
+      selectedQuery: '',
     });
   }
 
   /* HTTP Client Requests using DataService */
   getAll() {
-    this.dataService.sendGetRequest('/').pipe(takeUntil(this.destroy$)).subscribe((res: HttpResponse<any>) => {
-      this.jobs = res.body.response;
-      console.log(this.jobs);
-    })
+    this.dataService
+      .sendGetRequest('/')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: HttpResponse<any>) => {
+        this.jobs = res.body.response;
+        // console.log(this.jobs);
+      });
   }
   getSingle(jobid: string) {
-    this.dataService.sendGetRequest('/' + jobid).pipe(takeUntil(this.destroy$)).subscribe((res: HttpResponse<any>) => {
-      this.singleJob = res.body.response;
-      console.log(this.singleJob);
-    })
+    this.dataService
+      .sendGetRequest('/' + jobid)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: HttpResponse<any>) => {
+        this.singleJob = res.body.response;
+        // console.log(this.singleJob);
+      });
   }
-  getFilteredClass(classnum: string) {
-    this.dataService.sendGetRequest('?classnum=' + classnum).pipe(takeUntil(this.destroy$)).subscribe((res: HttpResponse<any>) => {
-      this.jobs = res.body.response;
-      console.log(this.jobs);
-    });
+  getFiltered(queryParam: string) {
+    this.dataService
+      .sendGetRequest('?' + this.selectedParam + '=' + queryParam)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: HttpResponse<any>) => {
+        this.jobs = res.body.response;
+        // console.log(this.jobs);
+      });
   }
 
   /* Instantiate Video Component in popup */
   videoPopup(jobid: string) {
-    this.dataService.sendGetRequest('/' + jobid).pipe(takeUntil(this.destroy$)).subscribe((res: HttpResponse<any>) => {
-      this.singleJob = res.body.response[0];
-      console.log(this.singleJob);
-      const dialogRef = this.dialog.open(VideoComponent, {
-        width: '100%',
-        height: '100%',
-        data: this.singleJob,
-        // data: {
-        //   generatortype: this.singleJob.generatortype,
-        //   metadata: this.singleJob.metadata,
-        //   jobdetails: this.singleJob.jobdetails,
-        // },
-        disableClose: true
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-      });
+    this.dataService
+      .sendGetRequest('/' + jobid)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: HttpResponse<any>) => {
+        this.singleJob = res.body.response[0];
+        // console.log(this.singleJob);
+        const dialogRef = this.dialog.open(VideoComponent, {
+          width: '100%',
+          height: '100%',
+          data: this.singleJob,
+          // data: {
+          //   generatortype: this.singleJob.generatortype,
+          //   metadata: this.singleJob.metadata,
+          //   jobdetails: this.singleJob.jobdetails,
+          // },
+          disableClose: true,
+        });
 
-    })
+        dialogRef.afterClosed().subscribe((result) => {
+          // console.log('The dialog was closed');
+        });
+      });
   }
   /* Instantiate Add Component in popup */
   addPopup() {
@@ -81,18 +104,22 @@ export class FirstComponent implements OnInit, OnDestroy {
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe((result) => {
+      // console.log('The dialog was closed');
       this.getAll();
     });
   }
   /* Handle Query Parameter Requests */
   queryParamSubmit() {
-    if(this.form.value.classnum !== "") {
-      this.getFilteredClass(this.form.value.classnum);
+    if (this.form.value.queryParam !== '') {
+      this.getFiltered(this.form.value.queryParam);
     } else {
       this.getAll();
     }
+  }
+  // Event handler for the select element's change event
+  selectChangeHandler(event: any) {
+    this.selectedParam = event.target.value;
   }
   ngOnInit() {
     this.getAll();

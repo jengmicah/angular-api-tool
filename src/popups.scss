@@ -12,21 +12,10 @@
   }
   .mat-dialog-content {
     margin: 10px 0;
-    padding: 0;
     max-height: none;
     text-align: center;
   }
-  .mat-dialog-title {
-    width: fit-content;
-    font-size: 1em;
-    padding: 5px 15px;
-    background: #eee;
-    border-radius: 8px;
-    margin: 5px;
-    display: inline-block;
-  }
   .mat-dialog-container {
     position: relative;
-    text-align: center;
   }
 }

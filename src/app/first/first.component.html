@@ -12,9 +12,17 @@
     <h5>Query Params:</h5>
     <form [formGroup]="form" (ngSubmit)="queryParamSubmit()">
       <div class="form-row row">
-        <label>Class</label>
+        <select required 
+                formControlName="selectedQuery"
+                (change)="selectChangeHandler($event)"                
+        >
+          <option value="classnum" selected value>Class</option>
+          <option value="module_name">Module</option>
+          <option value="model_name">Model</option>
+        </select>
+
         <input
-          formControlName="classnum"
+          formControlName="queryParam"
           type="text"
           placeholder="Enter text..."
           value
@@ -27,7 +35,7 @@
   <div class="cards-wrapper">
     <mat-spinner *ngIf="jobs.length === 0"></mat-spinner>
     <mat-card *ngFor="let job of jobs">
-      <mat-card-content *ngIf="job.jobdetails.signedUrls">
+      <mat-card-content class="featured_img" *ngIf="job.jobdetails.signedUrls" (click)="videoPopup(job.jobdetails.jobID)">
         <video width="100%">
           <source src="{{ job.jobdetails.signedUrls }}" type="video/mp4" />
           <source src="{{ job.jobdetails.signedUrls }}" type="video/ogg" />
@@ -48,11 +56,6 @@
           <label>Frequency: </label><span>{{ job.frequency }}</span>
         </div>
       </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button (click)="videoPopup(job.jobdetails.jobID)">
-          View
-        </button>
-      </mat-card-actions>
     </mat-card>
   </div>
 </main>

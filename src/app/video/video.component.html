@@ -1,15 +1,61 @@
 <button class="close" mat-button (click)="onNoClick()">
   <fa-icon [icon]="faTimes"></fa-icon>
 </button>
+<div class="row">
+  <div class="column left">
+    <div mat-dialog-content>
+      <video id="videoPlayer" width="100%" controls>
+        <source src="{{ job.jobdetails.signedUrls }}" [attr.data-original]="job.jobdetails.signedUrls" type="video/mp4" />
+        <source src="{{ job.jobdetails.signedUrls }}" [attr.data-original]="job.jobdetails.signedUrls" type="video/ogg" />
+        Your browser does not support the video tag.
+      </video>
+      <div class="job-meta">
+        <span
+          ><strong>Model Name:</strong> {{ job.jobdetails.model_name }}</span
+        >
+        <span
+          ><strong>Modules:</strong>
+          {{ job.jobdetails.module_names.join(", ") }}</span
+        >
+        <span><strong>JobID:</strong> {{ job.jobdetails.jobID }}</span>
+        <span
+          ><strong>Ingested Date:</strong>
+          {{ job.ingested_date_time.split("T")[0] }}</span
+        >
+        <span
+          ><strong>Ingested Time:</strong>
+          {{ job.ingested_date_time.split("T")[1] }}</span
+        >
+      </div>
+    </div>
+  </div>
+  <div class="column right">
+    <div class="list-section">
+      <h2 mat-dialog-title>Classes</h2>
+      <button
+        mat-button
+        disableRipple
+        class="list-section-item"
+        [ngStyle]=" i === activeIndex ? {'background-color': '#000', 'color': '#fff'} : {'background-color': '#fff', 'color': '#000'} "
+        (click)="initTimeline(c.key); setActiveIndex(i)"
+        matTooltip="{{ c.value }}"
+        *ngFor="let c of classes; let i = index"
+      >
+        {{ c.key }}
+      </button>
+    </div>
 
-<div mat-dialog-title><strong>Model Name:</strong> {{ data.jobdetails.model_name }}</div>
-<div mat-dialog-title><strong>Generator Type:</strong> {{ data.generatortype }}</div>
-<div mat-dialog-title><strong>JobID:</strong> {{ data.jobdetails.jobID }}</div>
+    <mat-divider></mat-divider>
 
-<div mat-dialog-content>
-  <video width="100%" controls>
-    <source src="{{ data.jobdetails.signedUrls }}" type="video/mp4" />
-    <source src="{{ data.jobdetails.signedUrls }}" type="video/ogg" />
-    Your browser does not support the video tag.
-  </video>
+    <div class="list-section">
+      <h2 mat-dialog-title>Timeline</h2>
+      <nav class="timeline-nav"></nav>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="list-section">
+      <h2 mat-dialog-title>Screenshots</h2>
+    </div>
+  </div>
 </div>

@@ -29,6 +29,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    NgJsonEditorModule
+    NgJsonEditorModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,3 +1,74 @@
+/* Create two equal columns that floats next to each other */
+span, p {
+  font-weight: 200;
+}
 video {
-    width:80%;
+  margin-bottom: 15px;
+}
+.column {
+  float: left;
+  height: 100vh;
+  overflow-y: scroll;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+.mat-dialog-content {
+  padding: 0;
+}
+.mat-dialog-title {
+  margin-bottom: 10px;
+  color: rgba(0, 0, 0, 0.87);
+}
+::ng-deep .mat-dialog-container {
+  padding: 0 !important;
+}
+.mat-dialog-content {
+  text-align: center;
+}
+
+.left {
+  width: 60%;
+  padding: 20px 30px;
+}
+.right {
+  width: 40%;
+  padding: 0;
+}
+
+.job-meta {
+  text-align: left;
+}
+.job-meta span {
+  display: block;
+  margin: 5px 0;
+}
+
+.list-section {
+  padding: 20px 30px;
+}
+.list-section-item {
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  width: fit-content;
+  border-radius: 25px;
+  padding: 1px 8px;
+  margin: 0 5px 5px 0;
+
+  line-height: normal;
+  min-width: 40px;
 }
