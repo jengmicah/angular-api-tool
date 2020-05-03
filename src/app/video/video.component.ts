@@ -58,6 +58,13 @@ export class VideoComponent implements OnInit {
         let text = document.createTextNode(ts);
         button.setAttribute('mat-button','');
         button.appendChild(text);
+        button.style.backgroundColor = "#fff";
+        button.style.color = "#555";
+        button.style.border = "1px solid #555";
+        button.style.outline = "none";
+        button.style.borderRadius = "5px";
+        button.style.margin = "1px";
+        button.style.cursor = "pointer";
         // button.style.padding = "5px";
         // console.log(ts / videoDuration, ts, videoDuration);
         // button.style.marginLeft = (ts / videoDuration * 100).toString();
