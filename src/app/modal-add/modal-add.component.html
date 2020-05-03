@@ -5,7 +5,7 @@
 <h1 align="center">Add an Entry</h1>
 
 <form [formGroup]="form" (submit)="addEntry()" align="center">
-  <json-editor style="max-width: 1000px" #editor [options]="options" [data]="data" (change)="changeLog($event)" formControlName="postData">
+  <json-editor style="width: 90%" #editor [options]="options" [data]="data" (change)="changeLog($event)" formControlName="postData">
   </json-editor>
   <button class="button green add-item" color="green" style="margin-top: 10px;" type="submit">
     Submit

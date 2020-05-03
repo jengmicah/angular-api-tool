@@ -60,6 +60,8 @@ export class ModalVideoComponent implements OnInit {
     if (this.classTimestampMap[classnum] !== undefined) {
       let videoDuration = this.video.duration * 1000; // in milliseconds
       let timestamps = this.classTimestampMap[classnum];
+      this.timelineMarkers = []; // Empty markers
+
       // Iterate through all timestamps associated with selected class
       timestamps.forEach((ts) => {
         // Push to Marker object to array with relevant values

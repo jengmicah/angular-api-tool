@@ -25,7 +25,7 @@
   </section>
 
   <div class="cards-wrapper">
-    <mat-spinner *ngIf="jobs.length === 0"></mat-spinner>
+    <div *ngIf="jobs.length === 0">No Data to Show</div>
     <mat-card *ngFor="let job of jobs">
       <mat-card-content class="featured_img" *ngIf="job.jobdetails.signedUrls"
         (click)="videoPopup(job.jobdetails.jobID)">

@@ -3,6 +3,8 @@
 :host ::ng-deep json-editor > div,
 :host ::ng-deep json-editor jsoneditor-outer {
   height: 350px;
+  width:90%;
+  margin: 0 auto;
 }
 textarea.jsoneditor-text {
   min-height: 350px;
