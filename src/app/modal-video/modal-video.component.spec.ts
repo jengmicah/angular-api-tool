@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModalVideoComponent } from './modal-video.component';
 
-describe('VideoComponent', () => {
+describe('ModalVideoComponent', () => {
   let component: ModalVideoComponent;
   let fixture: ComponentFixture<ModalVideoComponent>;
 

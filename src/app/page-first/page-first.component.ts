@@ -12,10 +12,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-first',
-  templateUrl: './first.component.html',
-  styleUrls: ['./first.component.css'],
+  templateUrl: './page-first.component.html',
+  styleUrls: ['./page-first.component.css'],
 })
-export class FirstComponent implements OnInit, OnDestroy {
+export class PageFirstComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   jobs: JobAll[] = [];

@@ -22,10 +22,10 @@ video {
   background: #f1f1f1;
 }
 ::-webkit-scrollbar-thumb {
-  background: #aaa;
+  background: #ddd;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #999;
+  background: #bbb;
 }
 .mat-dialog-content {
   padding: 0;
@@ -81,10 +81,14 @@ video {
   margin-bottom: 10px;
 }
 .markers {
-  width: 4px;
+  width: 2px;
   height: 25px;
   position: absolute;
   background-color: #1f1f1f;
   outline: none;
   cursor: pointer;
+}
+.mat-divider {
+  border-top-width: 5px;
+  border-top-color: #eee;
 }

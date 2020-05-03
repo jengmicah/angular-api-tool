@@ -7,8 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NavigationComponent } from './navigation/navigation.component';
-import { FirstComponent } from './first/first.component';
-import { SecondComponent } from './second/second.component';
+import { PageFirstComponent } from './page-first/page-first.component';
+import { PageSecondComponent } from './page-second/page-second.component';
 import { ModalVideoComponent } from './modal-video/modal-video.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -36,8 +36,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   declarations: [
     AppComponent,
     NavigationComponent,
-    FirstComponent,
-    SecondComponent,
+    PageFirstComponent,
+    PageSecondComponent,
     ModalVideoComponent,
     ModalAddComponent
   ],
