@@ -35,8 +35,10 @@ Update to latest code with <br>`git pull`
 
 Run `npm install`<br>
 <br>If there is an issue with native packages:
-<br>&nbsp;&nbsp;&nbsp;Run `npm install -g node-gyp`
-<br>&nbsp;&nbsp;&nbsp;Run `npm install --global --production windows-build-tools`	(if windows OS)
+
+Run `npm install -g node-gyp`
+
+Run `npm install --global --production windows-build-tools`	(if windows OS)
 
 ### Ensure API is running
 
